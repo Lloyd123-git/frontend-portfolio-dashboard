@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frontend Project Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation Header-->
+  <header class="app-header">
+    <h1>Project DevRoadmap</h1>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙 Dark Mode</button>
+  </header>
+  <main class="dasboard-container">
+    <!-- Sidebar Input Form-->
+    <section class="form-section" aria-labelleby="form-title">
+      <h2 id="form-title">Add New Project</h2>
+      <form id="project-fom">
+        <div class="form-group">
+          <label for="project-name">Project Name</label>
+          <input type="text" id="project-name" required placeholder="e.g., Markdown Previewer">
+        </div>
+
+        <div class ="form-group">
+          <label for="project-desc">Description</label>
+          <textarea id="project-desc" required placeholder="Breif summary of what it does.."></textarea> 
+        </div>
+
+        <div class="form-group">
+          <label for="project-difficulty">Difficulty</label>
+          <select id="project-difficulty" required>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="project-url">GitHub Repository URL</label>
+          <input type="url" id="project-url" required placeholder="https://github.com...">
+        </div>
+
+        <button type="submit" class="submit-btn">Add to Dashboard</button>
+    </form>
+    </section>
+
+    <!-- Main Display Content Dashboard -->
+    <section class="display-section" aria-labelledby="dashboard-title">
+      <header class="filter-controls">
+        <h2 id="dashboard-title">My Technical Track</h2>
+        <div class="filter-group">
+          <label for="status-filter">
+            <select id="status-filter">
+              <option value="All">All Projects</option>
+              <option value="Not Started">Not Started</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+        </div>
+      </header>
+
+      <!-- Dynamic Project Grid Target Area -->
+      <div id="project-grid class=project-grid">
+        <!-- JavaScript DOM injection template for reference -->
+        <article class="project-card placeholder-card">
+          <h3>Your First Project Grid Card</h3>
+          <p>When you complete the JavaScript section, your project inputs will instantly print cards dynamically!</p>
+          <span class="badge beginner">Beginner</span>
+          <div class="card-footer">
+            <span class="status-indicator">Status:Not Started</span>
+            <div>
+              <button class="btn-toggle">Update</button>
+              <button class="btn-delete">Delete</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
