@@ -70,7 +70,21 @@
     if (filteredProjects.length === 0) {
       projectGrid.innerHTML = `
         <div class="placeholder-card" style="grid-column: 1/-1; text-align: center; padding: 2rem;">
-            <p>No projects listed under "${filterValue}" metrics yet. Log your first track step above!</p>
+          <article class="project-card placeholder-card">
+            <h3>Your First Project Grid Card</h3>
+            <p>This is a Display of what your project card will look like</p>
+            <p style="text-align: left;">Project name</p>
+            <p style="text-align: left;">Project Description</p>
+            <span class="badge beginner">Beginner</span>
+            <div class="card-footer">
+              <span class="status-indicator">Status:Not Started</span>
+              <div>
+                <button class="btn-toggle">Update</button>
+                <button class="btn-delete">Delete</button>
+              </div>
+            </div>
+          </article>
+          <p>No projects listed under "${filterValue}" metrics yet. Log your first track step above!</p>
         </div>
         `;
         return;
