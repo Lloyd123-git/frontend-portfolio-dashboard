@@ -33,7 +33,7 @@
   }
 
   window.toggleProjectStatus = function(id) {
-    const statusSequence = ['Not Startet', 'In Progress', 'Completed'];
+    const statusSequence = ['Not Started', 'In Progress', 'Completed'];
       projects = projects.map(project => {
       if (project.id === id) {
         const nextIndex = (statusSequence.indexOf(project.status)+ 1) % statusSequence.length;
