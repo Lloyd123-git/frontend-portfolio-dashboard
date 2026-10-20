@@ -22,7 +22,7 @@
   });
 
   function updateThemeButtonIcon(theme) {
-    theme.Toggle.textContent = theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+    themeToggle.textContent = theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
   }
 
   // drop-down control 
@@ -31,11 +31,12 @@
       renderDashboard(e.target.value);
     });
   }
-  window.toggleProjectStatus = funtion(id) {
+
+  window.toggleProjectStatus = function(id) {
     const statusSequence = ['Not Startet', 'In Progress', 'Completed'];
-    projects = projects.map(project => {
+      projects = projects.map(project => {
       if (project.id === id) {
-        const nextInex = (statusSequence.indexOf(project.status)+ 1) % statusSequence.length;
+        const nextIndex = (statusSequence.indexOf(project.status)+ 1) % statusSequence.length;
         project.status = statusSequence[nextIndex];
       }
       return project;
@@ -55,10 +56,11 @@
   }
 
   // Dom manipulation of data
-
   function renderDashboard(filterValue = 'All') {
-    //Clear out current cards 
+    //Clear out current card
     projectGrid.innerHTML = '';
+
+    
 
     //Filter project list objects based on active control dropdowns state
     const filteredProjects = projects.filter(project => {
@@ -78,8 +80,8 @@
     filteredProjects.forEach(project =>{
       const cardHTML = `
         <article class="project-card" data-id="${project.id}">
-          <h3>${santizieHTML(project.name)}</h3>
-          <p>${santizeHTML(project.desc)}</p>
+          <h3>${sanitizeHTML(project.name)}</h3>
+          <p>${sanitizeHTML(project.desc)}</p>
           <span class="badge ${project.difficulty.toLowerCase()}">${project.difficulty}</span>
           <div class="card-footer">
             <span class="status-indicator"><strong>Status:</strong> ${project.status}</span>
@@ -90,6 +92,7 @@
           </div>
         </article>
       `;
+      console.log(project.name);
     projectGrid.insertAdjacentHTML('beforeend', cardHTML);
     });
   }
@@ -105,6 +108,34 @@
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
 
+  }
+
+  // add card to page
+  if (projectForm) {
+    projectForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const nameInput = document.getElementById('project-name');
+      const descInput = document.getElementById('project-desc');
+      const diffInput = document.getElementById('project-difficulty');
+
+      if (!nameInput || !descInput) return;
+
+      const newProject = {
+        id: Date.now().toString(),
+        name: nameInput.value,
+        desc: descInput.value,
+        difficulty: diffInput ? diffInput.value : 'Medium',
+        status: 'Not Started'
+      };
+
+      projects.push(newProject);
+      saveState();
+
+      projectForm.reset();
+      renderDashboard(statusFilter ? statusFilter.value : 'All');
+
+    });
   }
 
   document.addEventListener('DOMContentLoaded',() =>{
